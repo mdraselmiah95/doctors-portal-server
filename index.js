@@ -24,7 +24,7 @@ async function run() {
     app.post("/appointments", async (req, res) => {
       const appointment = req.body;
       const result = await appointmentsCollection.insertOne(appointment);
-      console.log(result);
+      // console.log(result);
       res.json(result);
     });
   } finally {
