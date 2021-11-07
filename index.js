@@ -26,6 +26,8 @@ async function run() {
       const result = await appointmentsCollection.insertOne(appointment);
       // console.log(result);
       res.json(result);
+
+      //code end
     });
   } finally {
     // await client.close();
