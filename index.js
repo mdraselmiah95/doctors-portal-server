@@ -20,14 +20,6 @@ async function run() {
     await client.connect();
     const database = client.db("doctors_portal");
     const appointmentsCollection = database.collection("appointments");
-
-    // app.get("/users")
-    // app.post("/users")
-    // app.get("/users/:id")
-    // app.put("/users/:id")
-    // app.delete("users/:id")
-    // users: get
-    // users: post
   } finally {
     // await client.close();
   }
@@ -41,3 +33,15 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Listening at Port ${port}`);
 });
+
+/* 
+
+  // app.get("/users")
+    // app.post("/users")
+    // app.get("/users/:id")
+    // app.put("/users/:id")
+    // app.delete("users/:id")
+    // users: get
+    // users: post
+
+*/
