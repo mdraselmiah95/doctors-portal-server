@@ -18,6 +18,8 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
+    const database = client.db("example_name");
+    const exampleCollection = database.collection("example");
     console.log("database connect");
   } finally {
     // await client.close();
