@@ -57,6 +57,15 @@ async function run() {
       res.json(result);
     });
 
+    app.put("/users/admin", async (req, res) => {
+      const user = req.body;
+      console.log("put", user);
+      const filter = { email: user.email };
+      const updateDoc = { $set: { role: "admin" } };
+      const result = await usersCollection.updateOne(filter, updateDoc);
+      res.json(result);
+    });
+
     //code end
   } finally {
     // await client.close();
