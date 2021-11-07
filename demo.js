@@ -21,6 +21,13 @@ async function run() {
     const database = client.db("example_name");
     const exampleCollection = database.collection("example");
     console.log("database connect");
+    // app.get("/users")
+    // app.post("/users")
+    // app.get("/users/:id")
+    // app.put("/users/:id")
+    // app.delete("users/:id")
+    // users: get
+    // users: post
   } finally {
     // await client.close();
   }
