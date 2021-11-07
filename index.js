@@ -25,7 +25,7 @@ async function run() {
       const email = req.query.email;
       const date = new Date(req.query.date).toLocaleDateString();
       const query = { email: email, date: date };
-      const cursor = appointmentsCollection.find({ query });
+      const cursor = appointmentsCollection.find(query);
       const appointments = await cursor.toArray();
       res.json(appointments);
     });
