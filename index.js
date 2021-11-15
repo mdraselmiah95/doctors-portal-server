@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 require("dotenv").config();
+const ObjectId = require("mongodb").ObjectId;
 const admin = require("firebase-admin");
 const { MongoClient } = require("mongodb");
 
@@ -50,6 +51,13 @@ async function run() {
       const cursor = appointmentsCollection.find(query);
       const appointments = await cursor.toArray();
       res.json(appointments);
+    });
+
+    app.get("/appointments/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await appointmentsCollection.findOne(query);
+      res.json(result);
     });
 
     app.post("/appointments", async (req, res) => {
