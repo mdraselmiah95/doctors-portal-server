@@ -92,6 +92,7 @@ async function run() {
     app.post("/doctors", async (req, res) => {
       console.log("body", req.body);
       console.log("files", req.files);
+      res.json({ success: true });
     });
 
     app.get("/users/:email", async (req, res) => {
