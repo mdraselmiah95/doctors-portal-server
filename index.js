@@ -43,6 +43,7 @@ async function run() {
     const database = client.db("doctors_portal");
     const appointmentsCollection = database.collection("appointments");
     const usersCollection = database.collection("users");
+    const doctorsCollection = database.collection("doctors");
 
     app.get("/appointments", verifyToken, async (req, res) => {
       const email = req.query.email;
