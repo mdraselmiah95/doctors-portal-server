@@ -90,9 +90,19 @@ async function run() {
     });
 
     app.post("/doctors", async (req, res) => {
-      console.log("body", req.body);
-      console.log("files", req.files);
-      res.json({ success: true });
+      const name = req.body.name;
+      const email = req.body.email;
+      const pic = req.files.image;
+      const picData = pic.data;
+      const encodedPic = picData.toString("base64");
+      const imageBuffer = Buffer.from(encodedPic, "base64");
+      const doctor = {
+        name,
+        email,
+        image: imageBuffer,
+      };
+      const result = await doctorsCollection.insertOne(doctor);
+      res.json(result);
     });
 
     app.get("/users/:email", async (req, res) => {
