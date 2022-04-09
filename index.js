@@ -89,7 +89,10 @@ async function run() {
       res.json(result);
     });
 
-    app.post("/doctors", async(re));
+    app.post("/doctors", async (req, res) => {
+      console.log("body", req.body);
+      console.log("files", req.files);
+    });
 
     app.get("/users/:email", async (req, res) => {
       const email = req.params.email;
