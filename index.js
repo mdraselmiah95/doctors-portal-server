@@ -21,11 +21,19 @@ async function run() {
   try {
     await client.connect();
     // console.log("Database connected...");
+    /**
+     * API Naming Convention
+     * app.get('/booking') //get all bookings in this collection or get more than one or by filter
+     * app.get('/booking/:id') //get a specific booking
+     * app.get('/booking/:id')
+     */
 
+    //Collection
     const serviceCollection = client
       .db("doctors_portal")
       .collection("services");
 
+    //Get services data
     app.get("/services", async (req, res) => {
       const query = {};
       const cursor = serviceCollection.find(query);
