@@ -45,6 +45,15 @@ async function run() {
 
     app.post("/booking", async (req, res) => {
       const booking = req.body;
+      const query = {
+        treatment: booking.treatment,
+        data: booking.data,
+        patient: booking.patient,
+      };
+      const exist = await bookingCollection.findOne(query);
+      if (exist) {
+        return res.send({ success: false, booking: exist });
+      }
       const result = await bookingCollection.insertOne(booking);
       res.send(result);
     });
@@ -54,7 +63,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello Doctors Portal");
 });
 
 app.listen(port, () => {
