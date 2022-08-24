@@ -51,7 +51,7 @@ async function run() {
       // step 1:  get all services
       const services = await serviceCollection.find().toArray();
 
-      // step 2: get the booking of that day. output: [{}, {}, {}, {}, {}, {}]
+      // step 2: get the booking of that day. output: [{}, {}, {}, {}, {}, {}, {}, {}]
       const query = { date: date };
       const bookings = await bookingCollection.find(query).toArray();
 
