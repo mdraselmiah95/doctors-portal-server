@@ -55,7 +55,7 @@ async function run() {
         return res.send({ success: false, booking: exist });
       }
       const result = await bookingCollection.insertOne(booking);
-      res.send(result);
+      return res.send({ success: true, result });
     });
   } finally {
   }
