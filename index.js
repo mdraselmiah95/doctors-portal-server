@@ -33,7 +33,9 @@ async function run() {
     const serviceCollection = client
       .db("doctors_portal")
       .collection("services");
-    const bookingCollection = client.db("doctors_portal").collection("booking");
+    const bookingCollection = client
+      .db("doctors_portal")
+      .collection("bookings");
 
     //Get services data
     app.get("/services", async (req, res) => {
