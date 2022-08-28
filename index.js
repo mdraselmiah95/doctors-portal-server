@@ -10,6 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+//MongoDB
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lidezs8.mongodb.net/?retryWrites=true&w=majority`;
 
 //Verify JWT Token
@@ -66,9 +67,20 @@ async function run() {
       res.send(services);
     });
 
-    app.get("/user", async (req, res) => {
+    app.get("/users", verifyJWT, async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users);
+    });
+
+    app.put("/user/admin/:email", async (req, res) => {
+      const email = req.params.email;
+      const filter = { email: email };
+      const updateDoc = {
+        $set: { role: admin },
+      };
+      const result = await userCollection.updateOne(filter, updateDoc);
+
+      res.send(result);
     });
 
     app.put("/user/:email", async (req, res) => {
