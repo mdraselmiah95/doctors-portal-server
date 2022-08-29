@@ -80,6 +80,12 @@ async function run() {
       res.send(services);
     });
 
+    //get all appointment
+    app.get("/appointments", verifyJWT, async (req, res) => {
+      const appointments = await bookingCollection.find().toArray();
+      res.send(appointments);
+    });
+
     app.get("/users", verifyJWT, async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users);
