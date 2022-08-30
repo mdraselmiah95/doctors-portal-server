@@ -60,7 +60,7 @@ async function run() {
     const userCollection = client.db("doctors_portal").collection("users");
     const doctorCollection = client.db("doctors_portal").collection("doctors");
 
-    //Verify Admin
+    // Verify Admin
     const verifyAdmin = async (req, res, next) => {
       const requester = req.decoded.email;
       const requesterAccount = await userCollection.findOne({
@@ -73,7 +73,7 @@ async function run() {
       }
     };
 
-    //Get services data
+    // Get services data
     app.get("/services", async (req, res) => {
       const query = {};
       const cursor = serviceCollection.find(query).project({ name: 1 });
@@ -81,12 +81,13 @@ async function run() {
       res.send(services);
     });
 
-    //get all appointment
+    // Get all appointment
     app.get("/appointments", verifyJWT, async (req, res) => {
       const appointments = await bookingCollection.find().toArray();
       res.send(appointments);
     });
 
+    // Get all Users
     app.get("/users", verifyJWT, async (req, res) => {
       const users = await userCollection.find().toArray();
       res.send(users);
@@ -184,14 +185,20 @@ async function run() {
       return res.send({ success: true, result });
     });
 
-    //Add Doctor
-    app.post("/doctor", async (req, res) => {
+    // Get Doctor
+    app.get("/doctor", async (req, res) => {
+      const doctors = await doctorCollection.find().toArray();
+      res.send(doctors);
+    });
+
+    // Add Doctor
+    app.post("/doctor", verifyJWT, async (req, res) => {
       const doctor = req.body;
       const result = await doctorCollection.insertOne(doctor);
       res.send(result);
     });
 
-    //end
+    // End
   } finally {
   }
 }
