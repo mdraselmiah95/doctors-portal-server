@@ -186,13 +186,13 @@ async function run() {
     });
 
     // Get Doctor
-    app.get("/doctor", async (req, res) => {
+    app.get("/doctor", verifyJWT, verifyAdmin, async (req, res) => {
       const doctors = await doctorCollection.find().toArray();
       res.send(doctors);
     });
 
     // Add Doctor
-    app.post("/doctor", verifyJWT, async (req, res) => {
+    app.post("/doctor", verifyJWT, verifyAdmin, async (req, res) => {
       const doctor = req.body;
       const result = await doctorCollection.insertOne(doctor);
       res.send(result);
